@@ -39,14 +39,6 @@ class Module_Chatjs extends Module {
         /** Lets create some fields for the messages Stream * */
         $fields = array(
             array(
-                'name' => 'User',
-                'slug' => 'user_chat',
-                'namespace' => $this->st_namespace,
-                'type' => 'user',
-                'assign' => $this->st_slug,
-                'required' => false
-            ),
-            array(
                 'name' => 'Message',
                 'slug' => 'message',
                 'namespace' => $this->st_namespace,
@@ -58,14 +50,21 @@ class Module_Chatjs extends Module {
                 'name' => 'is Guest',
                 'slug' => 'is_gest',
                 'namespace' => $this->st_namespace,
-                'type' => 'integer',
-                'extra' => array('default_value' => '1'),
+                'type' => 'text',
                 'assign' => $this->st_slug,
                 'required' => true
             ),
             array(
                 'name' => 'Guest Name',
                 'slug' => 'guest_name',
+                'namespace' => $this->st_namespace,
+                'type' => 'text',
+                'assign' => $this->st_slug,
+                'required' => false
+            ),            
+            array(
+                'name' => 'datetime',
+                'slug' => 'chat_datetime',
                 'namespace' => $this->st_namespace,
                 'type' => 'text',
                 'assign' => $this->st_slug,
@@ -105,6 +104,38 @@ class Module_Chatjs extends Module {
             )
         );
         $this->streams->fields->add_fields($fields_u);
+        /** now lets create the active users table **/
+        $this->streams->streams->add_stream(
+                'active_users', 'active_users', $this->st_namespace, 'chatjs_'
+        );
+         /** now lets add some fields to the active user table * */
+        $fields_u_a = array(
+            array(
+                'name' => 'User ID',
+                'slug' => 'user_id_c',
+                'namespace' => $this->st_namespace,
+                'type' => 'user',
+                'assign' => 'active_users',
+                'required' => true
+            ),
+            array(
+                'name' => 'User IP',
+                'slug' => 'user_b_ip',
+                'namespace' => $this->st_namespace,
+                'type' => 'text',
+                'assign' => 'active_users',
+                'required' => true
+            ),
+            array(
+                'name' => 'last_activity',
+                'slug' => 'last_activity_u_a',
+                'namespace' => $this->st_namespace,
+                'type' => 'text',
+                'assign' => 'active_users',
+                'required' => true
+            )
+        );
+        $this->streams->fields->add_fields($fields_u_a);
         return true;
     }
 

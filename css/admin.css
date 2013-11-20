@@ -1,2 +1,84 @@
-.chatjsUsers{list-style:none}
-/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+@font-face {
+  font-family: 'icomoon';
+  src: url('../fonts/icomoon.eot');
+  src: url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'), url('../fonts/icomoon.woff') format('woff'), url('../fonts/icomoon.ttf') format('truetype'), url('../fonts/icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+  font-family: 'icomoon';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-cancel-circle,
+.icon-chat-alt-stroke,
+.icon-layers {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+.icon-cancel-circle:before {
+  content: "\e000";
+}
+.icon-chat-alt-stroke:before {
+  content: "\e001";
+}
+.icon-layers:before {
+  content: "\e002";
+}
+.ChatjsUsers {
+  list-style: none;
+  margin-bottom: 10px !important;
+}
+.ChatjsUsers li {
+  padding: 5px;
+  border-top: solid 1px #ccc;
+  border-left: solid 1px #ccc;
+  border-right: solid 1px #ccc;
+}
+.ChatjsUsers li .action-buttons {
+  display: block;
+  margin-top: -20px;
+  float: right;
+}
+.ChatjsUsers li .action-buttons .btn {
+  margin-left: 7px;
+  float: left;
+  text-align: center;
+}
+#chat-window {
+  height: 400px;
+  overflow-y: scroll;
+  border: solid 1px #ccc;
+}
+#chat-window .msj {
+  padding: 5px;
+  border-bottom: solid 1px #ccc;
+}
+#chat-window .msj img {
+  float: left;
+  margin-right: 5px;
+}
+#chat-window .dateChat {
+  color: #ccc;
+  float: right;
+}
+.chatjs_conrols input {
+  width: 98%;
+}
+.chatjs_conrols button {
+  margin-top: -5px;
+}

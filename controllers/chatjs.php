@@ -17,6 +17,17 @@ class chatjs extends Public_Controller {
      * Get the active users
      */
     public function get_active_users() {
+        /** check for invalid users, users that have not been active since 1 hour ago **/
+        $datetime = strtotime('-5 minutes',strtotime(date('Y-m-d H:i:s')));
+        $params_d = array(
+            'stream' => 'active_users',
+            'namespace' => $this->namespace,
+            'where' => "last_activity_u_a < '" .$datetime."'"
+        );
+        $entries_d = $this->streams->entries->get_entries($params_d);
+        foreach($entries_d['entries'] as $e_d){
+            $this->streams->entries->delete_entry($e_d['id'], 'active_users', $this->namespace);
+        }
         $params = array(
             'stream' => 'active_users',
             'namespace' => $this->namespace

@@ -41,10 +41,12 @@
 </section>
 <script type="text/x-handlebars-template" id="user-template">
     <li>
-        <strong>{{ user }}</strong> <br />
+        <strong>{{ user }}</strong><strong>{{ gest_name }}</strong> <br />
         <?php echo lang('chatjs:last_activiy') ?>: {{ last_activity }}
         <div class="action-buttons">
-            <a href="javascript:void(0)" data-user-id="{{ user_id }}" class="btn red"><?php echo lang('chatjs:ban_user') ?></a>
+            {{#if isUser}}
+            <a href="javascript:void(0)" data-user-id="{{ user_id }}" class="btn red ban-user"><?php echo lang('chatjs:ban_user') ?></a>
+            {{/if}}
             <a href="javascript:void(0)" data-user-ip="{{ user_ip }}" class="btn red"><?php echo lang('chatjs:ban_ip') ?></a>
         </div>
     </li>

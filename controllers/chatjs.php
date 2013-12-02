@@ -38,6 +38,8 @@ class chatjs extends Public_Controller {
             $users[] = array(
                 'user_id' => $e['created_by']['user_id'],
                 'user' => $e['created_by']['display_name'],
+                'gest_name' => (!empty($e['user_nick_c'])) ? $e['user_nick_c'] : false,
+                'isUser' => (!empty($e['created_by']['user_id'])) ? true : false,
                 'last_activity' => date('Y-m-d H:i:s', $e['last_activity_u_a']),
                 'user_ip' => $e['user_b_ip']
             );
@@ -57,7 +59,8 @@ class chatjs extends Public_Controller {
                 'namespace' => $this->namespace,
                 'where' => "`chat_datetime` > '" . $t . "'",
                 'order_by' => 'chat_datetime',
-                'sort' => 'ASC'
+                'sort' => 'ASC',
+                'limit' => 200
             );
             $entries = $this->streams->entries->get_entries($params);
             if ($entries['total'] > 0) {
@@ -102,6 +105,13 @@ class chatjs extends Public_Controller {
                     'last_activity_u_a' => strtotime(date('Y-m-d H:i:s')),
                 );
                 $this->streams->entries->update_entry($entries['entries'][0]['id'],$entry_data, 'active_users', 'chatjs');
+            }else{
+                $entry_data = array(
+                    'user_id_c' => $this->current_user->id,
+                    'user_b_ip' => $_SERVER['REMOTE_ADDR'],
+                    'last_activity_u_a' => strtotime(date('Y-m-d H:i:s')),
+                );
+                $this->streams->entries->insert_entry($entry_data, 'active_users', 'chatjs');
             }
         }else{
             $params = array(
@@ -115,11 +125,18 @@ class chatjs extends Public_Controller {
                     'last_activity_u_a' => strtotime(date('Y-m-d H:i:s')),
                 );
                 $this->streams->entries->update_entry($entries['entries'][0]['id'],$entry_data, 'active_users', 'chatjs');
+            }else{
+                $entry_data = array(
+                    'user_nick_c' => $this->input->post('gest_name'),
+                    'user_b_ip' => $_SERVER['REMOTE_ADDR'],
+                    'last_activity_u_a' => strtotime(date('Y-m-d H:i:s')),
+                );
+                $this->streams->entries->insert_entry($entry_data, 'active_users', 'chatjs');
             }
         }
         $entry_data = array(
             'message' => $this->input->post('message'),
-            'is_guest' => (int) $this->input->post('is_guest'),
+            'is_gest' => $is_g,
             'guest_name' => $this->input->post('gest_name'),
             'chat_datetime' => strtotime(date('Y-m-d H:i:s'))
         );

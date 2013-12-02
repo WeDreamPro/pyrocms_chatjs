@@ -133,6 +133,14 @@ class Module_Chatjs extends Module {
                 'type' => 'text',
                 'assign' => 'active_users',
                 'required' => true
+            ),
+            array(
+                'name' => 'user_nick_c',
+                'slug' => 'user_nick_c',
+                'namespace' => $this->st_namespace,
+                'type' => 'text',
+                'assign' => 'active_users',
+                'required' => false
             )
         );
         $this->streams->fields->add_fields($fields_u_a);

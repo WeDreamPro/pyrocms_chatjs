@@ -2,7 +2,7 @@ var CHAT = {};
 (function($, CHAT, undefined){
     
     CHAT.admin = {
-        'last_time': moment().format('YYYY-MM-DD H:mm:ss'),
+        'last_time': new Date(),
         'get_users': function(){
             var source = $('#user-template').html(),
             template = Handlebars.compile(source);
@@ -13,7 +13,7 @@ var CHAT = {};
                     var html = "";
                     for(x in json){
                         var user = json[x];
-                        user.last_activity = moment(user.last_activity).fromNow();
+                        user.last_activity = $.timeago(user.last_activity);
                         html += template(user);
                     }
                     $('#users-status').html(html);
@@ -38,7 +38,7 @@ var CHAT = {};
                     var html = "";
                     for(x in json.messages){
                         var user = json.messages[x];
-                        user.date = moment(user.date).fromNow();
+                        user.date = $.timeago(user.date);
                         html += template(user);
                     }
                     $('#chat-window').append(html);
@@ -63,9 +63,12 @@ var CHAT = {};
         return false;
     });
     
+    $(document).on('click','.ban-user',function(){
+        
+    })
+    
     $(function(){
         CHAT.admin.longPoll();
     })
     
 })(window.jQuery, window.CHAT);
-

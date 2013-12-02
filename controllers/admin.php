@@ -27,7 +27,7 @@ class Admin extends Admin_Controller {
 
     public function index() {
         $this->type->add_misc('<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js"></script>');
-        $this->type->add_misc('<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js"></script>');
+        $this->type->add_misc('<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.1.0/jquery.timeago.min.js"></script>');
         $params = array(
             'stream' => 'active_users',
             'namespace' => 'chatjs',

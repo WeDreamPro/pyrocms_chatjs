@@ -40,7 +40,7 @@
     </div>
 </section>
 <script type="text/x-handlebars-template" id="user-template">
-    <li>
+    <li id="cont_{{ user_id }}">
         <strong>{{ user }}</strong><strong>{{ gest_name }}</strong> <br />
         <?php echo lang('chatjs:last_activiy') ?>: {{ last_activity }}
         <div class="action-buttons">

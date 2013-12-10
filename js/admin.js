@@ -64,7 +64,16 @@ var CHAT = {};
     });
     
     $(document).on('click','.ban-user',function(){
-        
+        var $this = $(this),
+        $user = $this.data('user-id');
+        $this.css('opacity','0.2');
+        $.get(SITE_URL+'admin/chatjs/ban_user',{
+            user : $user
+        },function(json){
+            if(json.result == true){
+                $('#cont_'+$user).remove();
+            }
+        },'json');
     })
     
     $(function(){

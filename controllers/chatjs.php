@@ -94,6 +94,7 @@ class chatjs extends Public_Controller {
     public function post_message() {
         $is_g = (int) $this->input->post('is_guest');
         if (empty($is_g)) {
+            /** check if its a banned user **/
             $params = array(
                 'stream' => 'active_users',
                 'namespace' => 'chatjs',

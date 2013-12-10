@@ -48,4 +48,28 @@ class Admin extends Admin_Controller {
                 ->build('admin/body');
     }
 
+    public function ban_user() {
+        $user = $this->input->get('user');
+        /** search for the user * */
+        $params = array(
+            'stream' => 'active_users',
+            'namespace' => 'chatjs',
+            'where' => "user_id_c = '" . $user . "'"
+        );
+        $entries = $this->streams->entries->get_entries($params);
+        if ($entries['total'] > 0) {
+            /** remove it from active users table * */
+            $this->streams->entries->delete_entry($entries['entries'][0]['id'], 'active_users', 'chatjs');
+            /** ban the user * */
+            $entry_data = array(
+                'user_b' => $user,
+            );
+            $this->streams->entries->insert_entry($entry_data, 'banned_users', 'chatjs');
+            echo json_encode(array('result' => true));
+            die;
+        }
+        echo json_encode(array('result' => false));
+        die;
+    }
+
 }
